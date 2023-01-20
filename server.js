@@ -23,23 +23,43 @@ connection.once('open', () => {
     console.log('Connection failed...')
 });
 
+// Session store
+// let mongoStore = new MongoDbStore({
+//     mongoUrl:'mongodb://localhost:27017/pizza',
+//     mongooseConnection: connection,
+//     collection: 'sessions'
+// })
+
 // Event emitter
 const eventEmitter = new Emitter()
 app.set('eventEmitter', eventEmitter)
+
 
 // Session config
 app.use(session({
     secret: process.env.COOKIE_SECRET,
     resave: false,
-    store: new MongoDbStore({
-        // Session store
-        mongoUrl:'mongodb://localhost:27017/pizza',
-        mongooseConnection: connection, 
-        collection: 'sessions' 
+    store: MongoDbStore.create({
+        client: connection.getClient()
     }),
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hour
-}))     
+}))
+
+
+// Session config
+// app.use(session({
+//     secret: process.env.COOKIE_SECRET,
+//     resave: false,
+//     store: new MongoDbStore({
+//         // Session store
+//         mongoUrl:'mongodb://localhost:27017/pizza',
+//         mongooseConnection: connection, 
+//         collection: 'sessions' 
+//     }),
+//     saveUninitialized: false,
+//     cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hour
+// }))     
 
 // Passport config
 const passportInit = require('./app/config/passport')
