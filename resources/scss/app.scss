@@ -7,12 +7,14 @@ body {
     -webkit-font-smoothing: antialiased;
     color: $dark;
 }
+
 nav li:last-child a {
     background: $primary;
     &:hover {
         background: $primary-hover;
     }
 }
+
 nav li a {
     transition: $smooth;
     &:hover {
@@ -25,7 +27,6 @@ section.hero {
 .size {
     background: $secondary;
 }
-
 .add-to-cart {
     border: 2px solid $primary;
     color: $primary;
@@ -39,6 +40,7 @@ section.hero {
         outline: none;
     }
 }
+
 .btn-primary {
     background: $primary;
     transition: $smooth;
@@ -46,12 +48,14 @@ section.hero {
         background: $primary-hover;
     }
 }
+
 section.cart {
     background: $secondary;
     .amount {
         color: $primary;
     }
 }
+
 section.login {
     background: $secondary;
     min-height: calc(100vh - 86px);
@@ -65,4 +69,8 @@ section.login {
 .noty_theme__mint {
     border-radius: 50px!important;
     padding-left: 8px!important;
+}
+
+a.link {
+    color: $primary;
 }
