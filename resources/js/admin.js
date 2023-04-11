@@ -26,7 +26,7 @@ export function initAdmin(socket) {
                 <p>${ menuItem.item.name } - ${ menuItem.qty } pcs </p>
             `
         }).join('')
-    }
+      }
 
     function generateMarkup(orders) {
         return orders.map(order => {
@@ -72,6 +72,7 @@ export function initAdmin(socket) {
                 <td class="border px-4 py-2">
                     ${ moment(order.createdAt).format('hh:mm A') }
                 </td>
+                <td class="border px-4 py-2">${ order.phone }</td>
                 <td class="border px-4 py-2">
                     ${ order.paymentStatus ? 'paid' : 'Not paid' }
                 </td>

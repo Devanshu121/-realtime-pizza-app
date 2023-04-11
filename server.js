@@ -4,7 +4,7 @@ const app = express()
 const ejs = require('ejs')
 const path = require('path')
 const expressLayout = require('express-ejs-layouts')
-const PORT = process.env.PORT || 3000    // in place of 3000 you can app any port you want like-3300 or 3333 or 4000 etc..
+const PORT = process.env.PORT || 3300    // in place of 3300 you can app any port you want like-3300 or 3333 or 4000 etc..
 const mongoose = require('mongoose');
 const session = require('express-session')
 const flash = require('express-flash')
@@ -12,10 +12,10 @@ const MongoDbStore = require('connect-mongo')
 const passport = require('passport')
 const Emitter = require('events')
 
+
 //Database connection
 mongoose.set('strictQuery',false);
-const url = 'mongodb://localhost:27017/pizza';
-mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MONGO_CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 const connection = mongoose.connection
 connection.once('open', () => {
     console.log('Database connected...');
@@ -45,6 +45,7 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hour
 }))
+
 
 
 // Session config
@@ -87,6 +88,9 @@ app.set('view engine','ejs')
 
 // Routes
 require('./routes/web')(app)
+app.use((req, res) => {
+    res.status(404).render('errors/404')
+})
 
 
 
